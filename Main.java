@@ -3,7 +3,6 @@ public class Main {
     private int[][] ranking;
     private int[] next;
     private final int n1;
-    private int n_matchings;
     private int[][] matchings;
 
     public Main(int[][] apref, int[][] ranking) {
@@ -17,7 +16,6 @@ public class Main {
             this.apref = apref;
             this.ranking = ranking;
             this.next = new int[n1];
-            this.n_matchings = 0;
             this.matchings = new int[n1][(n1 * 2) / apref[0].length];
 
             // initialize all matches to unmatched (-1)
@@ -28,7 +26,13 @@ public class Main {
     }
 
     public boolean is_all_matched() {
-        return n_matchings == n1;
+        for (int i = 0; i < n1; i++) {
+            if (matchings[i][1] == -1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public int[][] run() {
@@ -52,9 +56,15 @@ public class Main {
             for (int i = 0; i < n1; i++) {
                 if (curr_matchings[i][0] != -1) { // if ai is unmatched
                     if (curr_matchings[i][0] == ranking[curr_matchings[i][1]][0] - 1) { // stable matching
-                        matchings[i] = new int[]{i, curr_matchings[i][1]};
+                        for (int r = 0; r < n1; r++) {
+                            if (matchings[r][1] == curr_matchings[i][1]) {
+                                matchings[r][1] = -1; // becomes free
 
-                        n_matchings++;
+                                next[i]++;
+                            }
+                        }
+
+                        matchings[i] = new int[]{i, curr_matchings[i][1]};
                     } else { // refuse
                         boolean refused = false;
 
