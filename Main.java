@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Main {
     private int[][] apref;
     private int[][] ranking;
