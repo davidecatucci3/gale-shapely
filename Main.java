@@ -1,6 +1,9 @@
+import java.util.Arrays;
+
 public class Main {
     private int[][] apref;
     private int[][] ranking;
+    private int[] next;
     private final int n1;
     private int n_matchings;
     private int[][] matchings;
@@ -15,6 +18,7 @@ public class Main {
         } else {
             this.apref = apref;
             this.ranking = ranking;
+            this.next = new int[n1];
             this.n_matchings = 0;
             this.matchings = new int[n1][(n1 * 2) / apref[0].length];
 
@@ -30,8 +34,6 @@ public class Main {
     }
 
     public int[][] run() {
-        int k = 0;
-
         // until there are still matching to do continue
         while (!is_all_matched()) {
             // each ai that is unmatched makes proposal to his best preference
@@ -40,6 +42,8 @@ public class Main {
 
             for (int i = 0; i < n1; i++) {
                 if (matchings[i][1] == -1) { // if ai is unmatched
+                    int k = next[i];
+
                     curr_matchings[i] = new int[]{i, apref[i][k] - 1};
                 } else {
                     curr_matchings[i] = new int[]{-1, -1};
@@ -49,15 +53,27 @@ public class Main {
             // each bi accept or refuse the ai proposal based on the rankings array
             for (int i = 0; i < n1; i++) {
                 if (curr_matchings[i][0] != -1) { // if ai is unmatched
-                    if (curr_matchings[i][0] == ranking[curr_matchings[i][1]][0] - 1) {
+                    if (curr_matchings[i][0] == ranking[curr_matchings[i][1]][0] - 1) { // stable matching
                         matchings[i] = new int[]{i, curr_matchings[i][1]};
 
                         n_matchings++;
+                    } else { // refuse
+                        boolean refused = false;
+
+                        for (int r = 0; r < n1; r++) {
+                            if (matchings[r][1] == curr_matchings[i][1]) {
+                                refused = true;
+
+                                next[i]++;
+                            }
+                        }
+
+                        if (!refused) {
+                            matchings[i] = new int[]{i, curr_matchings[i][1]};
+                        }
                     }
                 }
             }
-
-            k++;
         }
 
         return matchings;
