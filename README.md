@@ -8,10 +8,10 @@ This Java project implements a stable matching algorithm between two sets of ent
 - Includes input validation for matching array lengths
 
 ## Files
-Main.java: implementation of the algorithm
-TestMain.java: use the algorithm
+- Main.java: implementation of the algorithm
+- TestMain.java: use the algorithm
 
-## How to use it
+## How it works
 The algorithm works through iterative proposals:
 1. Unmatched entities propose to their next preferred choice
 2. Targets accept or refuse proposals based on their own rankings
@@ -22,7 +22,7 @@ The algorithm works through iterative proposals:
 - `ranking`: Preference rankings for acceptors (1-based indices)
 - `matchings`: Stores final matches (1-based in output)
 
-## Input Format
+## Input format
 Both input arrays should be square matrices with 1-based indices:
 
 1. `apref`: Proposer preferences
@@ -42,7 +42,7 @@ int[][] ranking = {
 };
 ```
 
-## Usage
+## How to use it 
 ```java
 Main algo = new Main(apref, ranking);
 
