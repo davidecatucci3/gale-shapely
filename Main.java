@@ -17,6 +17,11 @@ public class Main {
             this.ranking = ranking;
             this.n_matchings = 0;
             this.matchings = new int[n1][(n1 * 2) / apref[0].length];
+
+            // initialize all matches to unmatched (-1)
+            for (int i = 0; i < n1; i++) {
+                matchings[i] = new int[] {i, -1};
+            }
         }
     }
 
@@ -29,32 +34,25 @@ public class Main {
 
         // until there are still matching to do continue
         while (!is_all_matched()) {
-            // each ai makes that is not matched makes proposal to his best preference
+            // each ai that is unmatched makes proposal to his best preference
             int j = (n1 * 2) / apref[0].length;
-
             int[][] curr_matchings = new int[n1][j];
 
             for (int i = 0; i < n1; i++) {
-                if (k > 0) {
-                    if (matchings[i][1] == -1) {
-                        curr_matchings[i] = new int[]{i, apref[i][k] - 1};
-                    } else {
-                        curr_matchings[i] = new int[]{-1, -1};
-                    }
-                } else {
+                if (matchings[i][1] == -1) { // if ai is unmatched
                     curr_matchings[i] = new int[]{i, apref[i][k] - 1};
+                } else {
+                    curr_matchings[i] = new int[]{-1, -1};
                 }
             }
 
             // each bi accept or refuse the ai proposal based on the rankings array
             for (int i = 0; i < n1; i++) {
-                if (curr_matchings[i][0] != -1) {
+                if (curr_matchings[i][0] != -1) { // if ai is unmatched
                     if (curr_matchings[i][0] == ranking[curr_matchings[i][1]][0] - 1) {
                         matchings[i] = new int[]{i, curr_matchings[i][1]};
 
                         n_matchings++;
-                    } else {
-                        matchings[i] = new int[]{i, -1};
                     }
                 }
             }
