@@ -7,7 +7,11 @@ This Java project implements a stable matching algorithm between two sets of ent
 - Returns 1-based index matches for easy interpretation
 - Includes input validation for matching array lengths
 
-## How It Works
+## Files
+Main.java: implementation of the algorithm
+TestMain.java: use the algorithm
+
+## How to use it
 The algorithm works through iterative proposals:
 1. Unmatched entities propose to their next preferred choice
 2. Targets accept or refuse proposals based on their own rankings
