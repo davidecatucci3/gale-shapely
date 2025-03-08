@@ -7,7 +7,7 @@ This Java project implements a stable matching algorithm between two sets of ent
 - Returns 1-based index matches for easy interpretation
 - Includes input validation for matching array lengths
 
-## Files
+## File
 Main.java: implementation of the algorithm
 TestMain.java: use the algorithm
 
