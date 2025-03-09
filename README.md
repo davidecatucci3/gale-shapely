@@ -17,7 +17,7 @@ The algorithm works through iterative proposals:
 - `matchings`: Stores final matches (1-based in output)
 
 ## Input format
-Both input arrays should be square matrices with 1-based indices:
+Both input arrays should be matrices with 1-based indices:
 
 1. `apref`: Proposer preferences
 ```java
