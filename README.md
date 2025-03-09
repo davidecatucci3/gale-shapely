@@ -1,5 +1,5 @@
 # gale-shapley
-This Java project implements a stable matching algorithm between two sets of entities (e.g., men and women, students and schools, or hospitals and residents). The algorithm follows a proposal-acceptance pattern similar to the Gale-Shapley algorithm, adapted for custom preference handling.
+This Java project implements a stable matching algorithm between two sets of entities (e.g., men and women, students and schools, or hospitals and residents). The algorithm follows a proposal-acceptance pattern as the the Gale-Shapley algorithm, adapted for custom preference handling.
 
 ## Features
 - Implements a stable matching algorithm based on preference lists
